@@ -12,13 +12,17 @@ def start():
 3. Update a student record
 4. Get a student
 5. Display all the students
-
+6. Search student by name
+7. Count number of students
+8. filter students by age
+0. exit
 ''')
 		user_choice=int(input("Please enter the task you want to perform: "))
-		if user_choice == 1:
+		if user_choice==0:
+			print("exiting...")
+			exit()
+		elif user_choice == 1:
 			add_student()
-			print("back")
-
 		elif user_choice == 2:
 			delete_student()
 		elif user_choice == 3:
@@ -27,12 +31,17 @@ def start():
 			get_student()	
 		elif user_choice==5:
 			display_students()
+		elif user_choice==6:
+			search_student_by_name()
+		elif user_choice==7:
+			count_students()
+		elif user_choice==8:
+			filter_by_age()			
 		else:
 			print("Invalid input")		
 
-# Function to start our program
+# Function to add students to database
 def add_student():
-	print("Executing")
 	name=input("Please enter the student name: ")
 	age=int(input("Please enter the student age: "))
 	department=input("Please enter the student department: ")
@@ -102,6 +111,36 @@ def display_students():
 		print(f'Student id {student_id}: Name is {student_details["name"]}, Age is {student_details["age"]}, Department is {student_details["dept"]}')
 
 
+# Function to search student by name
+def search_student_by_name():
+	print(students_db)
+	flag=False
+	student_name=input("Enter name to search: ")
+	for student_id, student_details in students_db.items():
+		if student_details["name"]==student_name:
+			flag=True
+			print(f'Student id {student_id}, Name: {student_details["name"]}, Age:{student_details["age"]}, Department:{student_details["dept"]}')
+	if flag == False:
+		print("Student not found")	
+
+
+# Function to count student
+def count_students():
+	print(students_db)
+	num_students=len(students_db)
+	print(f"The number of students in the database is {num_students}")
+
+# Function to filter by age
+def filter_by_age():
+	print(students_db)
+	flag=False
+	student_age=int(input("Enter minimum age: "))
+	for student_id, student_details in students_db.items():
+		if student_details["age"]>student_age:
+			flag=True
+			print(f'Student id {student_id}, Name: {student_details["name"]}, Age:{student_details["age"]}, Department:{student_details["dept"]}')
+	if flag==False:
+		print("Age not found")		
 
 #Start Program
 start()
