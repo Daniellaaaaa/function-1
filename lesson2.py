@@ -115,7 +115,7 @@ def display_students():
 def search_student_by_name():
 	print(students_db)
 	flag=False
-	student_name=input("Enter name to search: ")
+	student_name=input("Enter name to search: ").lower()
 	for student_id, student_details in students_db.items():
 		if student_details["name"]==student_name:
 			flag=True
